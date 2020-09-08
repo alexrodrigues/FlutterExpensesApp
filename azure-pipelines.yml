@@ -3,27 +3,21 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+variables:
+  projectDirectory: '.'
 trigger:
 - master
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-- script: echo Initializing scrpits!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-  
-- task: FlutterInstall@0
-  inputs:
-    channel: 'stable'
-    version: 'latest'
-
-- task: FlutterBuild@0
-  inputs:
-    target: 'apk'
-    projectDirectory: '.'
+jobs:
+  - job: Android
+    pool:
+      vmImage: 'macOS-latest'
+    steps:
+    - task: FlutterInstall@0
+      inputs:
+        channel: 'stable'
+        version: 'latest'
+    
+    - task: FlutterBuild@0
+      inputs:
+        target: apk
+        projectDirectory: $(projectDirectory)
