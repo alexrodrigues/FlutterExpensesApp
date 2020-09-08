@@ -16,8 +16,4 @@ jobs:
       inputs:
         channel: 'stable'
         version: 'latest'
-    
-    - task: FlutterBuild@0
-      inputs:
-        target: apk
-        projectDirectory: $(projectDirectory)
+    - task: FlutterCommand@0
