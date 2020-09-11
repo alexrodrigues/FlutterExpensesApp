@@ -1,5 +1,6 @@
 import 'package:expenses_app/model/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:expenses_app/model/transaction.dart';
 
@@ -16,7 +17,7 @@ class TransactionCard extends StatelessWidget {
             decoration: BoxDecoration(border: Border.all(color: Colors.green)),
             padding: EdgeInsets.all(16.0),
             child: Text(
-              _transaction.amount.toString(),
+              "R\$ ${_transaction.amount}",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
@@ -30,7 +31,7 @@ class TransactionCard extends StatelessWidget {
                 _transaction.title,
                 style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold),
               ),
-              Text(_transaction.date.toString(),
+              Text(DateFormat.yMMMMd().format(_transaction.date),
                   style: TextStyle(fontSize: 12.0, color: Colors.grey)),
             ],
           )
