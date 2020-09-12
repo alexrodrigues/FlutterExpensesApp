@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class TransactionButton extends StatelessWidget {
   final String _title;
-  TransactionButton(this._title);
+  final Function _callback;
+  TransactionButton(this._title, this._callback);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +12,7 @@ class TransactionButton extends StatelessWidget {
         textColor: Colors.white,
         color: Colors.green,
         child: Text(_title),
-        onPressed: () {},
+        onPressed: _callback,
       ),
     );
   }

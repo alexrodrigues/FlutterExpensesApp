@@ -50,7 +50,7 @@ class MyHomePage extends StatelessWidget {
                 children: [
                   TransactionTextField('Titlte', 0, _onTextChanged),
                   TransactionTextField('Amount', 1, _onTextChanged),
-                  TransactionButton('Save')
+                  TransactionButton('Save', () {})
                 ],
               ),
             ),
