@@ -2,8 +2,6 @@ import 'package:expenses_app/model/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:expenses_app/model/transaction.dart';
-
 class TransactionCard extends StatelessWidget {
   final Transaction _transaction;
   TransactionCard(this._transaction);
