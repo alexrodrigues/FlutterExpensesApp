@@ -13,8 +13,19 @@ class TransactionFragment extends StatefulWidget {
 class _TransactionFragmentState extends State<TransactionFragment> {
   final List<Transaction> _list = TransactionRepository.fetchList();
 
-  void _onTextChanged(String text, int tag) {
-    print("New text: $text, tag: $tag");
+  void _addNewTransaction(String title, double amount) {
+    if (title == null && amount == null) {
+      return;
+    }
+    final newTransaction = Transaction(
+        id: DateTime.now().toString(),
+        title: title,
+        amount: amount,
+        date: DateTime.now());
+
+    setState(() {
+      _list.add(newTransaction);
+    });
   }
 
   @override
@@ -29,7 +40,7 @@ class _TransactionFragmentState extends State<TransactionFragment> {
             child: Text('Chart!'),
           ),
         ),
-        TransactionInput(_onTextChanged),
+        TransactionInput(_addNewTransaction),
         TransactionList(_list),
       ],
     );
