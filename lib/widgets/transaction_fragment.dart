@@ -30,19 +30,21 @@ class _TransactionFragmentState extends State<TransactionFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          width: double.infinity,
-          child: Card(
-            child: Text('Chart!'),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            width: double.infinity,
+            child: Card(
+              child: Text('Chart!'),
+            ),
           ),
-        ),
-        TransactionInput(_addNewTransaction),
-        TransactionList(_list),
-      ],
+          TransactionInput(_addNewTransaction),
+          TransactionList(_list),
+        ],
+      ),
     );
   }
 }
