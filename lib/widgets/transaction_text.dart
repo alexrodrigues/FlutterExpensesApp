@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 
 class TransactionTextField extends StatelessWidget {
   final String _title;
-  final Function _callback;
+  final TextEditingController _controller;
 
-  TransactionTextField(this._title, this._callback);
+  TransactionTextField(this._title, this._controller);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
-        onChanged: (text) {
-          _callback(text);
-        },
+        controller: _controller,
         cursorColor: Colors.green,
         decoration: InputDecoration(
             hintStyle: TextStyle(color: Colors.green),

@@ -5,8 +5,8 @@ import '../widgets/transaction_button.dart';
 
 class TransactionInput extends StatelessWidget {
   final Function _save;
-  String title;
-  double amount;
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
   TransactionInput(this._save);
 
   @override
@@ -16,13 +16,12 @@ class TransactionInput extends StatelessWidget {
       margin: EdgeInsets.all(16.0),
       child: Column(
         children: [
-          TransactionTextField('Title', (text) {
-            title = text;
-          }),
-          TransactionTextField('Amount', (text) {
-            amount = double.parse(text);
-          }),
-          TransactionButton('Save', () => _save(title, amount))
+          TransactionTextField('Title', _titleController),
+          TransactionTextField('Amount', _amountController),
+          TransactionButton(
+              'Save',
+              () => _save(
+                  _titleController.text, double.parse(_amountController.text)))
         ],
       ),
     );
