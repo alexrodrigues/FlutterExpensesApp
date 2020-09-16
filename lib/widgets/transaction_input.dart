@@ -9,6 +9,15 @@ class TransactionInput extends StatelessWidget {
   final _amountController = TextEditingController();
   TransactionInput(this._save);
 
+  void _submit() {
+    final _title = _titleController.text;
+    final _value = double.parse(_amountController.text);
+
+    if (_title.isNotEmpty && _value > 0) {
+      _save(_title, _value);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,12 +25,14 @@ class TransactionInput extends StatelessWidget {
       margin: EdgeInsets.all(16.0),
       child: Column(
         children: [
-          TransactionTextField('Title', _titleController),
-          TransactionTextField('Amount', _amountController),
-          TransactionButton(
-              'Save',
-              () => _save(
-                  _titleController.text, double.parse(_amountController.text)))
+          TransactionTextField('Title', _titleController, () => {}),
+          TransactionTextField(
+            'Amount',
+            _amountController,
+            () => _submit(),
+            inputType: TextInputType.numberWithOptions(decimal: true),
+          ),
+          TransactionButton('Save', () => _submit())
         ],
       ),
     );

@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 class TransactionTextField extends StatelessWidget {
   final String _title;
   final TextEditingController _controller;
-
-  TransactionTextField(this._title, this._controller);
+  final TextInputType inputType;
+  final Function _onSubmit;
+  TransactionTextField(this._title, this._controller, this._onSubmit,
+      {this.inputType = TextInputType.name});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
+        onSubmitted: (_) => _onSubmit,
+        keyboardType: inputType,
         controller: _controller,
         cursorColor: Colors.green,
         decoration: InputDecoration(
