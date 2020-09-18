@@ -3,18 +3,27 @@ import 'package:flutter/material.dart';
 import '../widgets/transaction_text.dart';
 import '../widgets/transaction_button.dart';
 
-class TransactionInput extends StatelessWidget {
+class TransactionInput extends StatefulWidget {
   final Function _save;
-  final _titleController = TextEditingController();
-  final _amountController = TextEditingController();
+
   TransactionInput(this._save);
+
+  @override
+  _TransactionInputState createState() => _TransactionInputState();
+}
+
+class _TransactionInputState extends State<TransactionInput> {
+  final _titleController = TextEditingController();
+
+  final _amountController = TextEditingController();
 
   void _submit() {
     final _title = _titleController.text;
     final _value = double.parse(_amountController.text);
 
     if (_title.isNotEmpty && _value > 0) {
-      _save(_title, _value);
+      widget._save(_title, _value);
+      Navigator.of(context).pop();
     }
   }
 
