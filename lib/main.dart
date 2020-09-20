@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import './widgets/transaction_list.dart';
 import './widgets/transaction_input.dart';
 import './model/transaction.dart';
-import './repository/transaction_repository.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _list = TransactionRepository.fetchList();
+  final List<Transaction> _list = [];
 
   void _addNewTransaction(String title, double amount) {
     if (title == null && amount == null) {
