@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -45,11 +43,19 @@ class Chart extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(16.0),
-      child: Row(
-        children: getGroupTransactions.map((e) {
-          return ChartBar(e[_DAY], e[_AMOUNT],
-              maxSpending == 0.0 ? 0.0 : (e[_AMOUNT] as double) / maxSpending);
-        }).toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: getGroupTransactions.map((e) {
+            return ChartBar(
+                e[_DAY],
+                e[_AMOUNT],
+                maxSpending == 0.0
+                    ? 0.0
+                    : (e[_AMOUNT] as double) / maxSpending);
+          }).toList(),
+        ),
       ),
     );
   }
