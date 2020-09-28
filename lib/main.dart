@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String title, double amount) {
+  void _addNewTransaction(String title, double amount, DateTime _pickedDate) {
     if (title == null && amount == null) {
       return;
     }
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         id: DateTime.now().toString(),
         title: title,
         amount: amount,
-        date: DateTime.now());
+        date: _pickedDate);
 
     setState(() {
       _list.add(newTransaction);

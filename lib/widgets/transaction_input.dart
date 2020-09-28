@@ -22,8 +22,8 @@ class _TransactionInputState extends State<TransactionInput> {
     final _title = _titleController.text;
     final _value = double.parse(_amountController.text);
 
-    if (_title.isNotEmpty && _value > 0) {
-      widget._save(_title, _value);
+    if (_title.isNotEmpty && _value > 0 && _pickedDate != null) {
+      widget._save(_title, _value, _pickedDate);
       Navigator.of(context).pop();
     }
   }
