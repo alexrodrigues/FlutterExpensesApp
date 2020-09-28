@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import './widgets/transaction_list.dart';
 import './widgets/transaction_input.dart';
+import './widgets/chart.dart';
 import './model/transaction.dart';
-import './repository/transaction_repository.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
         accentColor: Colors.white,
+        textTheme: ThemeData.light().textTheme.copyWith(
+              button: TextStyle(color: Colors.white),
+            ),
       ),
       home: MyHomePage(),
     );
@@ -29,9 +32,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _list = TransactionRepository.fetchList();
+  final List<Transaction> _list = [];
 
-  void _addNewTransaction(String title, double amount) {
+  List<Transaction> get _recentTransactions {
+    return _list.where((element) {
+      return element.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
+
+  void _addNewTransaction(String title, double amount, DateTime _pickedDate) {
     if (title == null && amount == null) {
       return;
     }
@@ -39,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         id: DateTime.now().toString(),
         title: title,
         amount: amount,
-        date: DateTime.now());
+        date: _pickedDate);
 
     setState(() {
       _list.add(newTransaction);
@@ -56,6 +65,12 @@ class _MyHomePageState extends State<MyHomePage> {
             behavior: HitTestBehavior.opaque,
           );
         });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _list.removeWhere((element) => element.id == id);
+    });
   }
 
   @override
@@ -75,13 +90,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: double.infinity,
-              child: Card(
-                child: Text('Chart!'),
-              ),
-            ),
-            TransactionList(_list),
+            Chart(_recentTransactions),
+            TransactionList(_list, _deleteTransaction),
           ],
         ),
       ),

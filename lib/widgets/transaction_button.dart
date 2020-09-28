@@ -9,7 +9,7 @@ class TransactionButton extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: RaisedButton(
-        textColor: Colors.white,
+        textColor: Theme.of(context).textTheme.button.color,
         color: Colors.green,
         child: Text(_title),
         onPressed: _callback,
