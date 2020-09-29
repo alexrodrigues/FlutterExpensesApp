@@ -88,11 +88,11 @@ class _MyHomePageState extends State<MyHomePage> {
     final heightOfChart = (MediaQuery.of(context).size.height -
             appBar.preferredSize.height -
             MediaQuery.of(context).padding.top) *
-        0.2;
+        0.35;
     final heightOfList = (MediaQuery.of(context).size.height -
             appBar.preferredSize.height -
             MediaQuery.of(context).padding.top) *
-        0.8;
+        0.65;
 
     return Scaffold(
       appBar: appBar,
