@@ -75,23 +75,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      backgroundColor: Colors.green,
+      title: Text('Expenses App'),
+      actions: [
+        IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => _startAddNewTransaction(context))
+      ],
+    );
+
+    final heightOfChart = (MediaQuery.of(context).size.height -
+            appBar.preferredSize.height -
+            MediaQuery.of(context).padding.top) *
+        0.2;
+    final heightOfList = (MediaQuery.of(context).size.height -
+            appBar.preferredSize.height -
+            MediaQuery.of(context).padding.top) *
+        0.8;
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text('Expenses App'),
-        actions: [
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () => _startAddNewTransaction(context))
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(_recentTransactions),
-            TransactionList(_list, _deleteTransaction),
+            Container(height: heightOfChart, child: Chart(_recentTransactions)),
+            Container(
+                height: heightOfList,
+                child: TransactionList(_list, _deleteTransaction)),
           ],
         ),
       ),
