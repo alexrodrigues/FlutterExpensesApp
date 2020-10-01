@@ -8,41 +8,45 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          FittedBox(child: Text("R\$${this._amount.toStringAsFixed(0)}")),
-          SizedBox(
-            height: 4.0,
-          ),
-          Container(
-            height: 60,
-            width: 10,
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.grey, width: 1.0)),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          child: Column(
+            children: [
+              FittedBox(child: Text("R\$${this._amount.toStringAsFixed(0)}")),
+              SizedBox(
+                height: 4.0,
+              ),
+              Container(
+                height: constraints.maxHeight * 0.6,
+                width: 10,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: Colors.grey, width: 1.0)),
+                    ),
+                    FractionallySizedBox(
+                      heightFactor: this._amoutPctOfTotal,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                    )
+                  ],
                 ),
-                FractionallySizedBox(
-                  heightFactor: this._amoutPctOfTotal,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10)),
-                  ),
-                )
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 4.0,
+              ),
+              Text(this._label),
+            ],
           ),
-          SizedBox(
-            height: 4.0,
-          ),
-          Text(this._label),
-        ],
-      ),
+        );
+      },
     );
   }
 }
