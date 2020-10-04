@@ -46,40 +46,46 @@ class _TransactionInputState extends State<TransactionInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          TransactionTextField('Title', _titleController, () => {}),
-          TransactionTextField(
-            'Amount',
-            _amountController,
-            () => _submit(),
-            inputType: TextInputType.numberWithOptions(decimal: true),
-          ),
-          Container(
-            height: 70.0,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(_pickedDate == null
-                      ? 'No text chosen!'
-                      : 'Picked date: ${DateFormat.yMd().format(_pickedDate)}'),
-                ),
-                FlatButton(
-                  onPressed: _presentDatePicker,
-                  child: Text(
-                    'Choose a date',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  textColor: Theme.of(context).primaryColor,
-                )
-              ],
+    return SingleChildScrollView(
+      child: Container(
+        width: double.infinity,
+        margin: EdgeInsets.only(
+            top: 16.0,
+            right: 16.0,
+            left: 16.0,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16.0),
+        child: Column(
+          children: [
+            TransactionTextField('Title', _titleController, () => {}),
+            TransactionTextField(
+              'Amount',
+              _amountController,
+              () => _submit(),
+              inputType: TextInputType.numberWithOptions(decimal: true),
             ),
-          ),
-          TransactionButton('Save', () => _submit())
-        ],
+            Container(
+              height: 70.0,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(_pickedDate == null
+                        ? 'No text chosen!'
+                        : 'Picked date: ${DateFormat.yMd().format(_pickedDate)}'),
+                  ),
+                  FlatButton(
+                    onPressed: _presentDatePicker,
+                    child: Text(
+                      'Choose a date',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    textColor: Theme.of(context).primaryColor,
+                  )
+                ],
+              ),
+            ),
+            TransactionButton('Save', () => _submit())
+          ],
+        ),
       ),
     );
   }

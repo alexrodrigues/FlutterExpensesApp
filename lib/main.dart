@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -80,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     final appBar = AppBar(
       backgroundColor: Colors.green,
       title: Text('Expenses App'),
@@ -90,13 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-    final heightOfChart = (MediaQuery.of(context).size.height -
+    final heightOfChart = (mediaQuery.size.height -
             appBar.preferredSize.height -
-            MediaQuery.of(context).padding.top) *
+            mediaQuery.padding.top) *
         0.30;
-    final heightOfList = (MediaQuery.of(context).size.height -
+    final heightOfList = (mediaQuery.size.height -
             appBar.preferredSize.height -
-            MediaQuery.of(context).padding.top) *
+            mediaQuery.padding.top) *
         0.70;
 
     return Scaffold(
@@ -113,14 +115,16 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        onPressed: () => _startAddNewTransaction(context),
-        backgroundColor: Colors.green,
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              onPressed: () => _startAddNewTransaction(context),
+              backgroundColor: Colors.green,
+            ),
     );
   }
 }
