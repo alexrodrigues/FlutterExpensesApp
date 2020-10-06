@@ -15,7 +15,10 @@ class TransactionList extends StatelessWidget {
             children: [
               Text(
                 'No transaction to show 🤪',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26.0),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 26.0,
+                    color: Theme.of(context).textTheme.bodyText1.color),
               ),
               SizedBox(
                 height: 16.0,
