@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TransactionTextField extends StatelessWidget {
@@ -11,19 +13,23 @@ class TransactionTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: TextField(
-        onSubmitted: (_) => _onSubmit,
-        keyboardType: inputType,
-        controller: _controller,
-        cursorColor: Colors.green,
-        decoration: InputDecoration(
-            hintStyle: TextStyle(color: Colors.green),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.green)),
-            labelStyle: TextStyle(color: Colors.green),
-            labelText: _title,
-            hoverColor: Colors.green),
-      ),
+      child: Platform.isIOS
+          ? CupertinoTextField(
+              placeholder: _title,
+            )
+          : TextField(
+              onSubmitted: (_) => _onSubmit,
+              keyboardType: inputType,
+              controller: _controller,
+              cursorColor: Colors.green,
+              decoration: InputDecoration(
+                  hintStyle: TextStyle(color: Colors.green),
+                  border: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.green)),
+                  labelStyle: TextStyle(color: Colors.green),
+                  labelText: _title,
+                  hoverColor: Colors.green),
+            ),
     );
   }
 }
